@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block content %}
+<link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/chatstyle.css')}}"
+/>
+<div class="room_body">
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>ByteFlow</h1>
+            <h2>Room: {{ code }}</h2>
+        </div>
+        <div class="chat-messages" id="messages">
+            <!-- Messages will go here -->
+        </div>
+        <div class="chat-input">
+            <button class="button-plus" id="open-popup">+</button>
+            <input class="myInput" type="text" rows="3" id="message" name="message" placeholder="Type a message..." onkeydown="handleKeyPress(event)" >
+            <button class = "button-send" type="button" name="send" id="send-btn" onClick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <div class="dialogue-box" id="dialogue-box">
+        <ul class="dialogue-options">
+            <li>
+                <label for="option1" class="custom-file-input">
+                    File
+                    <input type="file" id="option1" onchange="shareFileDisplay()">
+                </label>
+            </li>
+            <li><button id="option2">Audio</button></li>
+            <li><button id="option3">Image</button></li>
+        </ul>
+    </div>
+    <div class="fileshare-box" id="fileshare-box">
+        
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+        crossorigin="anonymous">
+</script>
+<script>
+    let socketio = io();
+
+    const messages = document.getElementById("messages");
+
+    const createMessage = (name, msg) => {
+        const content = `
+            <div class="text">
+                <span>
+                    <strong>${name}</strong>: ${msg}
+                </span>
+            </div>
+        `;
+        messages.innerHTML += content;
+    };
+
+    socketio.on("message", (data) => {
+        createMessage(data.name, data.message);
+    });
+
+    const sendMessage = () => {
+        const message = document.getElementById("message");
+        //if (message.value === "") return;
+        //socketio.emit("message", { data: message.value });
+        //message.value = "";
+
+        const fileInput = document.getElementById('option1');
+        const filesharebox = document.getElementById('fileshare-box');
+        if(filesharebox.style.display!='none')
+        {
+            console.log('hello');
+            let file = fileInput.files[0];
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                let fileContent = e.target.result;
+
+                // Emit the file data to the server
+                socketio.emit('file_shared', { filename: file.name, file_content: fileContent });
+            };
+            reader.readAsDataURL(file);
+            fileInput.style.display='none';
+        }
+    };
+    socketio.on('file_received', function (data) {
+            console.log('File:', data.filename);
+
+            // Create a div to display file information
+            let fileInfoDiv = document.createElement('div');
+            fileInfoDiv.innerHTML = `
+                <p class >Name_got_to_fix: ${data.filename}</p>
+                <button onclick="downloadFile('${data.filename}', '${data.file_content}')">Download</button>
+            `;
+
+            // Display the file information in the fileList div
+            let fileListDiv = document.getElementById('messages');
+            fileListDiv.appendChild(fileInfoDiv);
+        });
+        window.downloadFile = function (filename, fileContent) {
+            let blob = new Blob([fileContent], { type: 'application/octet-stream' });
+            let link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+        };
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            const message = document.getElementById("message");
+            if (message.value === "") return;
+            socketio.emit("message", { data: message.value });
+            message.value = "";
+        }
+    }
+    
+</script>
+<script src="{{ url_for('static', filename='js/chatscript.js') }}"></script>
+
+{% endblock %}

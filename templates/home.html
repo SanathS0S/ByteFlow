@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="center-container">
+    <p class="Name">
+       Byte Flow
+    </p>
+    <form class="form" method="post">
+        <input type="text" placeholder="Name" name="name" class="input">
+        <input type="text" placeholder="RoomID" name="id" class="input">
+        <div class="button-container">
+            <button class="button-confirm" name="action" value="join">Join Room</button>
+            <button class="button-confirm" name="action" value="create">Create Room</button>
+        </div>
+    </form>
+    {% if room_code %}
+    <ul>
+        <li>
+            <p>
+            Code generated is {{room_code}}
+            </p>
+        </li>
+    </ul>
+    {% endif %}
+    {% if error %}
+    <ul>
+        <li> {{error}} </li>
+    </ul>
+    {% endif %}
+</div>
+
+{% endblock %}
