@@ -12,11 +12,15 @@
             <button class="button-confirm" name="action" value="create">Create Room</button>
         </div>
     </form>
+    <div class="hidden" id ="show-code">
+        Code Copied!
+    </div>
     {% if room_code %}
     <ul>
         <li>
-            <p>
+            <p id = "codename" style="font-family: Pixelify Sans; font-size: 25px;">
             Code generated is {{room_code}}
+            <button onclick="copycode()" id ="copyButton" class="button-confirm2">Copy Code</button>
             </p>
         </li>
     </ul>
@@ -27,5 +31,45 @@
     </ul>
     {% endif %}
 </div>
+<script>
+    function copytoClipboard(finword)
+    {
+        const textarea = document.createElement("textarea");
+        textarea.value = finword;
+
+        // Make the textarea non-visible
+        textarea.style.position = "absolute";
+        textarea.style.left = "-9999px";
+
+        // Append the textarea to the document
+        document.body.appendChild(textarea);
+
+        // Select and copy the text from the textarea
+        textarea.select();
+        document.execCommand("copy");
+
+        // Remove the textarea
+        document.body.removeChild(textarea);
+    }
+    function copycode()
+    {
+        const code = document.getElementById('codename');
+        const inputString = code.innerText;
+        const words = inputString.split(" ");
+        const finword = words[3];
+        copytoClipboard(finword);
+
+    }
+    const copyButton = document.getElementById("copyButton");
+    const codedisplay = document.getElementById("show-code");
+    copyButton.addEventListener("click",()=>
+    {
+        codedisplay.classList.remove("hidden");
+        setTimeout(()=>{
+            codedisplay.classList.add("hidden");
+        },3000);
+    }
+    )
+</script>
 
 {% endblock %}
