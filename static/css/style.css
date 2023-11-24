@@ -4,6 +4,8 @@ body {
   justify-content: center;
   margin: 0;
   background-color: white;
+  --bg-color: #fff;
+  --main-color: #323232;
 }
 
 
@@ -100,6 +102,21 @@ body {
   cursor: pointer;
   margin-right: 10px;
 }
+.button-confirm2 {
+  margin: 10px auto 0 auto;
+  width: 120px;
+  margin-left: 20%;
+  height: 38px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  background-color: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--font-color);
+  cursor: pointer;
+  margin-right: 10px;
+}
 
 .button-container {
   display: inline-block;
@@ -109,6 +126,24 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* This ensures the container takes at least the full viewport height */
+}
+.hidden
+{
+  display: none;
+}
+#show-code
+{
+  position:fixed;
+  bottom: 18px;
+  left: 12%;
+  transform: translateX(-50%);
+  background-color: #3a3d3a;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  width :300px;
+  height: 20px;
+  font-family: Pixelify Sans;
 }
 
 

@@ -14,10 +14,37 @@ body{
     justify-content: stretch;
 }
 
+.text{
+  position : relative;
+  border-top: 1px solid #E8E8E8;
+  margin-top: 10px;
+}
+
+.file{
+  position : relative;
+  border-top: 1px solid #E8E8E8;
+  margin-top: 10px
+}
+
+.aud{
+  position : relative;
+  border-top: 1px solid #E8E8E8;
+  margin-top: 10px
+}
+
 .chat-container {
   flex: 1;
   display: flex;
   flex-direction: column;
+  
+}
+
+.timestamp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  color: #888;
 }
 
 .chat-header {
@@ -167,4 +194,121 @@ input[type="file"] {
   width: 75%;
   height:150px;
   text-align: center;
+}
+.imgshare-box
+{
+
+  display: none;
+  position: fixed;
+  top: auto;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  --main-color: #323232;
+  border: 2px solid var(--main-color);
+  border-radius: 20px;;
+  box-shadow: 4px 4px var(--main-color);
+  font-weight: 100;
+  width: 75%;
+  height:150px;
+  text-align: center;
+}
+.liveaud-box
+{
+  display: none;
+  position: fixed;
+  top: auto;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  --main-color: #323232;
+  border: 2px solid var(--main-color);
+  border-radius: 20px;;
+  box-shadow: 4px 4px var(--main-color);
+  font-weight: 100;
+  width: 75%;
+  height:150px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-download {
+  background-color: lightgrey;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  font-family: Pixelify Sans;
+  font-size: 16px; /* Adjust the font size as needed */
+  font-weight: 600;
+  --main-color: #323232;
+  border: 2px solid var(--main-color);
+  box-shadow: none; /* Remove the box shadow */
+  padding: 5px 10px; /* Adjust the padding as needed */
+  cursor: pointer;
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+/* Add CSS styles for the recording buttons */
+.button-record {
+  background-color: lightgrey;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  font-family: Pixelify Sans;
+  font-size: 20px;
+  font-weight: 600;
+  --main-color: #323232;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+/* Apply styles to the Start and Stop Recording buttons */
+#startRecording,
+#stopRecording {
+  background-color: lightgrey;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  font-family: Pixelify Sans;
+  font-size: 16px; /* Adjust the font size as needed */
+  font-weight: 600;
+  --main-color: #323232;
+  border: 2px solid var(--main-color);
+  box-shadow: none; /* Remove the box shadow */
+  padding: 5px 10px; /* Adjust the padding as needed */
+  cursor: pointer;
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+/* Style the "Start Recording" button when active (clicked) */
+#startRecording:active {
+  background-color: lightgrey; /* Adjust the background color when active (clicked) */
+  color: black; /* Adjust the text color when active */
+}
+
+/* Style the "Stop Recording" button when active (clicked) */
+#stopRecording:active {
+  background-color: lightgrey; /* Adjust the background color when active (clicked) */
+  color: black; /* Adjust the text color when active */
+}
+
+
+/*.file-para
+{
+
+}*/
+.submit
+{
+  display: none;
+}
+audio::-webkit-media-controls-panel {
+  border-radius: 25px;
+  background-color:lightgray;
+  margin-top:10px;
 }
