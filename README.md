@@ -23,6 +23,8 @@ ByteFlow is an interactive messaging application designed to facilitate seamless
 ## Installation Guide:
 To set up ByteFlow locally, follow these steps:
 1. Clone the repository.
+    ```bash
+    ```
 2. Install the necessary dependencies or run the script.bat file(ensure you have the latest version of pip installed).
 3. Run the application locally on your preferred server.
 
